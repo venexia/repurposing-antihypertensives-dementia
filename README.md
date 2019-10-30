@@ -24,7 +24,7 @@ The data used in this project are available on application from the Clinical Pra
 
 ## Supplementary material
 
-This repository contains two further items of supplementary material in the folder ‘Supplement’. These are Supplementary Table 5, which contains all the results in an editable format, and a spreadsheet of code lists, which is necessary to define the diagnoses and treatments in the CPRD as they were defined for this study.
+This repository contains three further items of supplementary material in the folder ‘Supplement’. These are eTable 5, which contains the results from Bonet's instrumental variable inequality tests; eTable 6, which contains all the results in an editable format; and a spreadsheet of code lists, which is necessary to define the diagnoses and treatments in the CPRD as they were defined for this study.
 
 ## Funding statement
 
