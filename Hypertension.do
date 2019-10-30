@@ -57,19 +57,13 @@ outsheet using "$output/analysisdta.csv", comma replace
 
 run "$dofiles/analysis_adj.do"
 
-* Exposure by age and sex for eTable 4 -----------------------------------------
+* Format eTables ---------------------------------------------------------------
 
-use "$data/analysis.dta", clear
-keep patid index_age_start drug male
-gen age_grp = floor(index_age_start/10)
-tab index_drug age_grp
-tab index_drug age_grp if male==1
+run "$dofiles/etables_preparedata.do"
+run "$dofiles/etables_preparedata_adj.do"
+run "$dofiles/etables_excelexport.do"
 
-* Format eTable 6 --------------------------------------------------------------
-
-run "$dofiles/format_etable6.do"
-
-* Convert relative risks to expected cases as described in eText 2 -------------
+* Convert relative risks to expected cases as described in eText 5 -------------
 
 run "$dofiles/func_RR2EC.do"
 RR2EC "ht_arb" 0.55 0.49 0.62

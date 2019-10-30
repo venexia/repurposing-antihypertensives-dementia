@@ -23,6 +23,6 @@ source("code/plot_analysis_adj.R")
 
 source("code/plot_ins_freq.R")
 
-# Format eTable 5 (Bonet's instrumental variable inequality tests) ============
+# Format eTable 3 (Bonet's instrumental variable inequality tests) ============
 
-source("code/format_etable5.R")
+source("code/format_etable03.R")
