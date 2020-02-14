@@ -34,11 +34,11 @@ rename x10 age_100_plus
 order index_drug sex
 export excel using "$output/etables.xlsx", first(var) sheet("eTable01",replace)
 
-* CREATE ETABLE02 - INSTRUMENT_EXPOSURE ESTIMATES ====================================
+* CREATE ETABLE02 - INSTRUMENT_EXPOSURE ESTIMATES ==============================
 
 use "$data/etable.dta", clear
 keep if cohort==1 & analysis=="first"
-keep outcome treat_int treat_ref sample_size coef stderr pval
+keep exposure outcome sample_size coef stderr pval
 export excel using "$output/etables.xlsx", first(var) sheet("eTable02",replace)
 
 * CREATE ETABLE03 - BONETS IV INEQUALITIES =====================================
@@ -49,96 +49,46 @@ export excel using "$output/etables.xlsx", first(var) sheet("eTable02",replace)
 
 use "$data/etable.dta", clear
 keep if cohort==1 & analysis=="iv"
-keep outcome treat_int treat_ref sample_size coef stderr pval Fstat endog endogp
+keep exposure outcome sample_size coef stderr pval Fstat endog endogp
 export excel using "$output/etables.xlsx", first(var) sheet("eTable04",replace)
 
 * CREATE ETABLE05 - MULTIVARIABLE REGRESSION RESULTS ===========================
 
-use "$data/etable.dta", clear
+use "$data/etable_cohorts.dta", clear
 keep if cohort==2 & analysis=="logit"
-keep outcome treat_int treat_ref sample_size coef stderr pval
+keep exposure outcome sample_size coef stderr pval
 export excel using "$output/etables.xlsx", first(var) sheet("eTable05",replace)
 
 * CREATE ETABLE06 - COMPLETE CASE IV RESULTS ===================================
 
-use "$data/etable.dta", clear
+use "$data/etable_cohorts.dta", clear
 keep if cohort==2 & analysis=="iv"
-keep outcome treat_int treat_ref sample_size coef stderr pval Fstat endog endogp
+keep exposure outcome sample_size coef stderr pval Fstat endog endogp
 export excel using "$output/etables.xlsx", first(var) sheet("eTable06",replace)
 
-* CREATE ETABLE07 - IV ADJ IMD2010 =============================================
+* CREATE ETABLE07 - IV ADJUSTMENTS IN EFIGURE 8 ================================
 
 use "$data/etable_adj.dta", clear
-keep if adj=="imd2010"
-keep outcome treat_int treat_ref sample_size coef stderr pval Fstat endog endogp
+keep adjustment exposure outcome sample_size coef stderr pval Fstat endog endogp
 export excel using "$output/etables.xlsx", first(var) sheet("eTable07",replace)
 
-* CREATE ETABLE08 - IV ADJ BMI =================================================
+* CREATE ETABLE08 - IV SUBTYPES IN EFIGURE 9 ===================================
 
-use "$data/etable_adj.dta", clear
-keep if adj=="bmi"
-keep outcome treat_int treat_ref sample_size coef stderr pval Fstat endog endogp
+use "$data/etable_subtypes.dta", clear
+keep exposure outcome sample_size coef stderr pval Fstat endog endogp
 export excel using "$output/etables.xlsx", first(var) sheet("eTable08",replace)
 
-* CREATE ETABLE09 - IV ADJ CHARLSON ============================================
+* CREATE ETABLE09 - IV SENSITIVITY ANALYSES ====================================
 
-use "$data/etable_adj.dta", clear
-keep if adj=="charlson"
-keep outcome treat_int treat_ref sample_size coef stderr pval Fstat endog endogp
+use "$data/etable_cohorts.dta", clear
+drop if sensitivity==""
+keep sensitivity exposure outcome sample_size coef stderr pval Fstat endog endogp
+order sensitivity exposure outcome sample_size coef stderr pval Fstat endog endogp
 export excel using "$output/etables.xlsx", first(var) sheet("eTable09",replace)
 
-* CREATE ETABLE10 - IV ADJ SEX =================================================
-
-use "$data/etable_adj.dta", clear
-keep if adj=="male"
-keep outcome treat_int treat_ref sample_size coef stderr pval Fstat endog endogp
-export excel using "$output/etables.xlsx", first(var) sheet("eTable10",replace)
-
-* CREATE ETABLE11 - IV ADJ AGE =================================================
-
-use "$data/etable_adj.dta", clear
-keep if adj=="index_age_start"
-keep outcome treat_int treat_ref sample_size coef stderr pval Fstat endog endogp
-export excel using "$output/etables.xlsx", first(var) sheet("eTable11",replace)
-
-* CREATE ETABLE12 - IV RESULTS WITHOUT ANXIETY PRESCRIPTIONS ===================
-
-use "$data/etable.dta", clear
-keep if cohort==3 & analysis=="iv"
-keep outcome treat_int treat_ref sample_size coef stderr pval Fstat endog endogp
-export excel using "$output/etables.xlsx", first(var) sheet("eTable12",replace)
-
-* CREATE ETABLE13 - IV RESULTS WITHOUT LOW DOSE PRESCRIPTIONS ==================
-
-use "$data/etable.dta", clear
-keep if cohort==4 & analysis=="iv"
-keep outcome treat_int treat_ref sample_size coef stderr pval Fstat endog endogp
-export excel using "$output/etables.xlsx", first(var) sheet("eTable13",replace)
-
-* CREATE ETABLE14 - IV RESULTS AGED 55+ ========================================
-
-use "$data/etable.dta", clear
-keep if cohort==5 & analysis=="iv"
-keep outcome treat_int treat_ref sample_size coef stderr pval Fstat endog endogp
-export excel using "$output/etables.xlsx", first(var) sheet("eTable14",replace)
-
-* CREATE ETABLE15 - ADJUSTED IV RESULTS ========================================
-
-use "$data/etable.dta", clear
-keep if cohort==1 & analysis=="iv_adj"
-keep outcome treat_int treat_ref sample_size coef stderr pval Fstat endog endogp
-export excel using "$output/etables.xlsx", first(var) sheet("eTable15",replace)
-
-* CREATE ETABLE16 - FIXED EFFECTS IV RESULTS ===================================
-
-use "$data/etable.dta", clear
-keep if cohort==1 & analysis=="iv_fe"
-keep outcome treat_int treat_ref sample_size coef stderr pval Fstat
-export excel using "$output/etables.xlsx", first(var) sheet("eTable16",replace)
-
-* Create ETABLE17 - SARGAN-HANSEN TEST RESULTS =================================
+* Create ETABLE10 - SARGAN-HANSEN TEST RESULTS =================================
 
 use "$data/etable.dta", clear
 keep if cohort==1 & analysis=="iv_oi"
-keep outcome treat_int treat_ref sample_size coef stderr pval Fstat endog endogp Hansen Hansenp
-export excel using "$output/etables.xlsx", first(var) sheet("eTable17",replace)
+keep exposure outcome sample_size coef stderr pval Fstat endog endogp Hansen Hansenp
+export excel using "$output/etables.xlsx", first(var) sheet("eTable10",replace)

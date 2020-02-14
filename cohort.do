@@ -230,6 +230,12 @@ replace pres_cat = 4 if pres_year>=2006
 replace pres_cat = 5 if pres_year>=2011
 tab pres_cat, gen(pres_year_)
 
+* Add age group variable -------------------------------------------------------
+
+gen age_grp = 1
+replace age_grp = 2 if index_age_start>=55
+replace age_grp = 3 if index_age_start>=70
+
 * Save -------------------------------------------------------------------------
 
 format %td *_date index_end	

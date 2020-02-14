@@ -16,7 +16,7 @@ Interpretation: We found small differences in antihypertensive drug class effect
 
 ## Using this code
 
-To run this code, set your working directory in the files ‘Hypertentension.do’ and ‘Hypertentension.R’. Run the file ‘Hypertentension.do’ in Stata initially and then ‘Hypertentension.R’ in R. All other files are called when required from these files. The Stata code covers most of the analysis, while the R code covers most of the graphical and supplementary output. If you would like any more information, please contact venexia.walker@bristol.ac.uk. 
+To run this code, set your working directory in the files ‘Hypertentension.do’ and ‘Hypertentension.R’. Run the file ‘Hypertentension.do’ in Stata initially and then ‘Hypertentension.R’ in R. All other files are called when required from these files. The Stata code covers most of the analysis, while the R code covers most of the graphical and supplementary output. Setup of the CPRD dataset prior to this analysis is covered in a separate repository: https://github.com/venexia/CleanCPRD.
 
 ## Availability of data
 
@@ -24,8 +24,15 @@ The data used in this project are available on application from the Clinical Pra
 
 ## Supplementary material
 
-This repository contains three further items of supplementary material in the folder ‘Supplement’. These are eTable 5, which contains the results from Bonet's instrumental variable inequality tests; eTable 6, which contains all the results in an editable format; and a spreadsheet of code lists, which is necessary to define the diagnoses and treatments in the CPRD as they were defined for this study.
+This repository contains three further items of supplementary material in the folder ‘Supplement’: 
+- [AntihypertensivesIV_Codelists.xlsx](https://github.com/venexia/repurposing-antihypertensives-dementia/blob/master/supplement/AntihypertensivesIV_Codelists.xlsx), which contains the code lists used to define the diagnoses and treatments in the CPRD as used in this study
+- [AntihypertensivesIV_eTables.xlsx](https://github.com/venexia/repurposing-antihypertensives-dementia/blob/master/supplement/AntihypertensivesIV_eTables.xlsx), which contains the supplementary tables associated with this paper
+- [AntihypertensivesIV_eText_eFigures.pdf](https://github.com/venexia/repurposing-antihypertensives-dementia/blob/master/supplement/AntihypertensivesIV_eText_eFigures.pdf), which contains the supplementary test and figures associated with this paper
 
 ## Funding statement
 
 This work was supported by the Perros Trust and the Integrative Epidemiology Unit. The Integrative Epidemiology Unit is supported by the Medical Research Council and the University of Bristol [grant number MC_UU_00011/1, MC_UU_00011/3]. 
+
+## Further information
+
+If you would like any further information, please contact venexia.walker@bristol.ac.uk. 

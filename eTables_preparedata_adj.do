@@ -14,37 +14,38 @@ replace ci_upper = cond(var=="outcome:exposure",exp(ci_upper),ci_upper)
 
 * Tidy dataset
 
-keep adj outcome treat_int treat_ref N coef stderr pval Fstat endog endogp
-order adj outcome treat_int treat_ref N coef stderr pval Fstat endog endogp
+keep adj exposure outcome N coef stderr pval Fstat endog endogp
+order adj exposure outcome N coef stderr pval Fstat endog endogp
 rename N sample_size
-replace adj = subinstr(adj, " ", "", .)
+rename adj adjustment
+replace adjustment = subinstr(adjustment, " ", "", .)
+
+* Recode adjustments
+
+replace adjustment = "Age at index" if adjustment == "index_age_start"
+replace adjustment = "Alcohol status" if adjustment == "alcohol"
+replace adjustment = "Annual consultation rate" if adjustment == "cons_rate" 
+replace adjustment = "Body mass index" if adjustment == "bmi"
+replace adjustment = "Cardiovascular disease" if adjustment == "cvd" 
+replace adjustment = "Chronic disease" if adjustment == "charlson"
+replace adjustment = "Coronary artery disease" if adjustment == "cad"
+replace adjustment = "Coronary bypass surgery" if adjustment == "cbs"
+replace adjustment = "Sex" if adjustment == "male"
+replace adjustment = "Smoking status" if adjustment == "smoking"
+replace adjustment = "Socioeconomic position" if adjustment == "imd2010"
 
 * Recode outcomes
 
-replace outcome = "Probable Alzheimer's disease" if outcome == "dem_adprob"
-replace outcome = "Possible Alzheimer's disease" if outcome == "dem_adposs"
-replace outcome = "Vascular dementia" if outcome == "dem_vas"
-replace outcome = "Other dementias" if outcome == "dem_oth"
-replace outcome = "Any dementia" if outcome == "dem_any"
+replace outcome = "Dementia" if outcome == "dementia"
 
 * Recode treatments of interest
 
-replace treat_int = "Alpha-adrenoceptor blockers" if treat_int == "ht_aab"
-replace treat_int = "Angiotensin-converting enzyme inhibitors" if treat_int == "ht_ace"
-replace treat_int = "Angiotensin-II receptor blockers" if treat_int == "ht_arb"
-replace treat_int = "Beta-adrenoceptor blockers" if treat_int == "ht_bab"
-replace treat_int = "Calcium channel blockers" if treat_int ==  "ht_ccb"
-replace treat_int = "Diuretics" if treat_int == "ht_diu"
-replace treat_int = "Vasodilator antihypertensives" if treat_int == "ht_vad"
-
-* Recode treatments of interest
-
-replace treat_ref = "Alpha-adrenoceptor blockers" if treat_ref == "ht_aab"
-replace treat_ref = "Angiotensin-converting enzyme inhibitors" if treat_ref == "ht_ace"
-replace treat_ref = "Angiotensin-II receptor blockers" if treat_ref == "ht_arb"
-replace treat_ref = "Beta-adrenoceptor blockers" if treat_ref == "ht_bab"
-replace treat_ref = "Calcium channel blockers" if treat_ref == "ht_ccb"
-replace treat_ref = "Diuretics" if treat_ref == "ht_diu"
-replace treat_ref = "Vasodilator antihypertensives" if treat_ref == "ht_vad"
+replace exposure = "Alpha-adrenoceptor blockers" if exposure == "ht_aab"
+replace exposure = "Angiotensin-converting enzyme inhibitors" if exposure == "ht_ace"
+replace exposure = "Angiotensin-II receptor blockers" if exposure == "ht_arb"
+replace exposure = "Beta-adrenoceptor blockers" if exposure == "ht_bab"
+replace exposure = "Calcium channel blockers" if exposure ==  "ht_ccb"
+replace exposure = "Diuretics" if exposure == "ht_diu"
+replace exposure = "Vasodilator antihypertensives" if exposure == "ht_vad"
 
 save "$data/etable_adj.dta", replace

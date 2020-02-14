@@ -36,13 +36,26 @@ run "$dofiles/cohort.do"
 
 run "$dofiles/cov.do"
 
-* Run reg analysis -------------------------------------------------------------
+* Run analyses on outcome 'dementia' -------------------------------------------
 
 run "$dofiles/analysis.do"
+
+* Run analyses on cohorts (e.g. complete covariate, low dose, etc.) ------------
+
+run "$dofiles/analysis_cohorts.do"
+
+* Run analyses on dementia subtype outcomes ------------------------------------
+
+run "$dofiles/analysis_subtypes.do"
+
+* Run analyses of drug vs drug (not included in paper)  ------------------------
+
+* run "$dofiles/analysis_refclasses.do"
 
 * Generate Table 1 -------------------------------------------------------------
 
 run "$dofiles/table1.do"
+run "$dofiles/table1_fiveplus.do"
 
 * Generate bias plot -----------------------------------------------------------
 
@@ -59,9 +72,12 @@ run "$dofiles/analysis_adj.do"
 
 * Format eTables ---------------------------------------------------------------
 
-run "$dofiles/etables_preparedata.do"
-run "$dofiles/etables_preparedata_adj.do"
-run "$dofiles/etables_excelexport.do"
+run "$dofiles/eTables_preparedata.do"
+run "$dofiles/eTables_preparedata_adj.do"
+run "$dofiles/eTables_preparedata_cohorts.do"
+run "$dofiles/eTables_preparedata_subtypes.do"
+run "$dofiles/eTables_five.do"
+run "$dofiles/eTables_excelexport.do"
 
 * Convert relative risks to expected cases as described in eText 5 -------------
 

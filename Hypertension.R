@@ -4,25 +4,44 @@ setwd("")
 rm(list=ls())
 graphics.off()
 library(tidyverse)
-
-### Note: the following files will call "code/plot_prepare.R"
+library(reshape2)
+library(patchwork)
+library(haven)
+library(data.table)
 
 # Plot main analysis results ==================================================
 
-source("code/plot_analysis.R")
+source("code/figure_main.R")
+
+# Plot sensitivity analysis results ===========================================
+
+source("code/figure_sensitivity.R")
+
+# Plot adjusted results ===========================================
+
+source("code/figure_adj.R")
+
+# Plot subtypes analysis results ==============================================
+
+source("code/figure_subtypes.R")
+
+# Plot logit results ==========================================================
+
+source("code/figure_logit.R")
+
+# Plot heat map figures (not included in paper) ===============================
+
+# source("code/figure_refclasses.R")
 
 # Plot bias scatter ===========================================================
 
-source("code/plot_bias_scatter.R")
-
-# Plot adjusted analysis results ==============================================
-
-source("code/plot_analysis_adj.R")
+source("code/figure_biascomponent.R")
 
 # Plot instrument frequency ===================================================
 
-source("code/plot_ins_freq.R")
+source("code/figure_insfreq.R")
 
-# Format eTable 3 (Bonet's instrumental variable inequality tests) ============
+# Format table containing Bonet's instrumental variable inequality tests) =====
 
-source("code/format_etable03.R")
+source("code/table_bonet.R")
+
