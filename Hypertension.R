@@ -1,6 +1,6 @@
 # Setup =======================================================================
 
-setwd("")
+setwd("E:/Dementia_CPRD_v2/projects/AntihypertensivesIV/")
 rm(list=ls())
 graphics.off()
 library(tidyverse)
@@ -8,6 +8,8 @@ library(reshape2)
 library(patchwork)
 library(haven)
 library(data.table)
+library(ggplot2)
+library(forcats)
 
 # Plot main analysis results ==================================================
 

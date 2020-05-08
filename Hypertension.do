@@ -1,7 +1,7 @@
 * Setup ------------------------------------------------------------------------
 
-global path ""
-global project ""
+global path "E:/Dementia_CPRD_v2"
+global project "$path/projects/AntihypertensivesIV"
 global dofiles "$project/code"
 global output "$project/output"
 global data "$project/data"
@@ -52,6 +52,10 @@ run "$dofiles/analysis_subtypes.do"
 
 * run "$dofiles/analysis_refclasses.do"
 
+* Run multiple imputation and repeat logistic regression analyses --------------
+
+run "$dofiles/multiple_imputation.do"
+
 * Generate Table 1 -------------------------------------------------------------
 
 run "$dofiles/table1.do"
@@ -59,7 +63,7 @@ run "$dofiles/table1_fiveplus.do"
 
 * Generate bias plot -----------------------------------------------------------
 
-run "$dofiles/bias_scatter.do"
+run "$dofiles/bias_component_plots.do"
 
 * Save analysis dataset --------------------------------------------------------
 
@@ -68,7 +72,7 @@ outsheet using "$output/analysisdta.csv", comma replace
 
 * Adjust based on bias scatter -------------------------------------------------
 
-run "$dofiles/analysis_adj.do"
+run "$dofiles/analysis_adj_mi.do"
 
 * Format eTables ---------------------------------------------------------------
 
@@ -76,7 +80,7 @@ run "$dofiles/eTables_preparedata.do"
 run "$dofiles/eTables_preparedata_adj.do"
 run "$dofiles/eTables_preparedata_cohorts.do"
 run "$dofiles/eTables_preparedata_subtypes.do"
-run "$dofiles/eTables_five.do"
+run "$dofiles/eTables_preparedata_imputed.do"
 run "$dofiles/eTables_excelexport.do"
 
 * Convert relative risks to expected cases as described in eText 5 -------------

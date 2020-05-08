@@ -85,7 +85,7 @@ ggplot(df[df$bin.cont=="continuous",],
                 width = 0,position = position_dodge(width = 0.5)) +
   geom_hline(yintercept=0, linetype = 2) +
   labs(y = "Coefficient and 95% CI", x = "", color = "") +
-  scale_y_continuous(breaks = seq(-600,600,100)) +
+  scale_y_continuous(lim = c(-13,13),breaks = seq(-12,12,2)) +
   theme_minimal() +
   theme(panel.grid.major.y = element_blank(), 
         panel.grid.minor = element_blank(),
@@ -107,7 +107,7 @@ ggplot(df[df$bin.cont=="binary",],
   geom_point(position = position_dodge(width = 0.5)) + 
   geom_errorbar(aes(ymin = exp(ci_lower_scaled), ymax = exp(ci_upper_scaled)),width = 0,position = position_dodge(width = 0.5)) +
   geom_hline(yintercept=1, linetype = 2) +
-  scale_y_continuous(trans="log", breaks =  10^(seq(-100,100,2)), limits = c(10^(-5),10^19)) + 
+  scale_y_continuous(trans="log",lim = c(0.7,3.6), breaks = c(seq(0.75,2,0.25),seq(2.5,3.5,0.5))) + 
   labs(y = "Odds ratio and 95% CI", x = "", color = "") +
   theme_minimal() +
   theme(panel.grid.major.y = element_blank(), 

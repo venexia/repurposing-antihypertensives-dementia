@@ -43,7 +43,7 @@ export excel using "$output/etables.xlsx", first(var) sheet("eTable02",replace)
 
 * CREATE ETABLE03 - BONETS IV INEQUALITIES =====================================
 
-** Performed in R (see script 'format_etable03.R')
+** Performed in R (see script 'table_bonet.R')
 
 * CREATE ETABLE04 - MAIN RESULTS ===============================================
 
@@ -54,41 +54,40 @@ export excel using "$output/etables.xlsx", first(var) sheet("eTable04",replace)
 
 * CREATE ETABLE05 - MULTIVARIABLE REGRESSION RESULTS ===========================
 
-use "$data/etable_cohorts.dta", clear
-keep if cohort==2 & analysis=="logit"
+use "$data/etable_imputed.dta", clear
 keep exposure outcome sample_size coef stderr pval
 export excel using "$output/etables.xlsx", first(var) sheet("eTable05",replace)
 
-* CREATE ETABLE06 - COMPLETE CASE IV RESULTS ===================================
+// * CREATE ETABLEXX - COMPLETE CASE IV RESULTS ===================================
+//
+// use "$data/etable_cohorts.dta", clear
+// keep if cohort==2 & analysis=="iv"
+// keep exposure outcome sample_size coef stderr pval Fstat endog endogp
+// export excel using "$output/etables.xlsx", first(var) sheet("eTableXX",replace)
 
-use "$data/etable_cohorts.dta", clear
-keep if cohort==2 & analysis=="iv"
-keep exposure outcome sample_size coef stderr pval Fstat endog endogp
-export excel using "$output/etables.xlsx", first(var) sheet("eTable06",replace)
-
-* CREATE ETABLE07 - IV ADJUSTMENTS IN EFIGURE 8 ================================
+* CREATE ETABLE06 - IV ADJUSTMENTS IN EFIGURE 8 ================================
 
 use "$data/etable_adj.dta", clear
-keep adjustment exposure outcome sample_size coef stderr pval Fstat endog endogp
-export excel using "$output/etables.xlsx", first(var) sheet("eTable07",replace)
+keep adjustment exposure outcome sample_size coef stderr
+export excel using "$output/etables.xlsx", first(var) sheet("eTable06",replace)
 
-* CREATE ETABLE08 - IV SUBTYPES IN EFIGURE 9 ===================================
+* CREATE ETABLE07 - IV SUBTYPES IN EFIGURE 9 ===================================
 
 use "$data/etable_subtypes.dta", clear
 keep exposure outcome sample_size coef stderr pval Fstat endog endogp
-export excel using "$output/etables.xlsx", first(var) sheet("eTable08",replace)
+export excel using "$output/etables.xlsx", first(var) sheet("eTable07",replace)
 
-* CREATE ETABLE09 - IV SENSITIVITY ANALYSES ====================================
+* CREATE ETABLE08 - IV SENSITIVITY ANALYSES ====================================
 
 use "$data/etable_cohorts.dta", clear
 drop if sensitivity==""
 keep sensitivity exposure outcome sample_size coef stderr pval Fstat endog endogp
 order sensitivity exposure outcome sample_size coef stderr pval Fstat endog endogp
-export excel using "$output/etables.xlsx", first(var) sheet("eTable09",replace)
+export excel using "$output/etables.xlsx", first(var) sheet("eTable08",replace)
 
-* Create ETABLE10 - SARGAN-HANSEN TEST RESULTS =================================
+* Create ETABLE09 - SARGAN-HANSEN TEST RESULTS =================================
 
 use "$data/etable.dta", clear
 keep if cohort==1 & analysis=="iv_oi"
 keep exposure outcome sample_size coef stderr pval Fstat endog endogp Hansen Hansenp
-export excel using "$output/etables.xlsx", first(var) sheet("eTable10",replace)
+export excel using "$output/etables.xlsx", first(var) sheet("eTable09",replace)

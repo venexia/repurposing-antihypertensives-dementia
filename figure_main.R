@@ -52,6 +52,6 @@ ggplot(df[df$analysis=="iv",],
         strip.text.y = element_text(size=8,hjust = 1, angle = 180),
         legend.position="none")
 
-ggsave("output/figure_main.jpeg", 
+ggsave("output/figure_main.pdf", 
        height = 100, width = 210, unit = "mm", 
        dpi = 600, scale = 1)

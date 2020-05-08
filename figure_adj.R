@@ -1,7 +1,31 @@
 # Load data ===================================================================
 
-df <- read.csv("output/analysis_reg_adj.csv", 
+df <- read.csv("output/analysis_reg_adj_mi.csv", 
                stringsAsFactors = FALSE)
+
+# Combine 20 imputation results using Rubin's rules: ==========================
+# https://bookdown.org/mwheymans/bookmi/rubins-rules.html#pooling-effect-estimates
+
+tmp <- df %>%
+  dplyr::group_by(adj,exposure,outcome) %>%
+  dplyr::summarise(coef_pooled = mean(coef), 
+                   v_w = mean(stderr^2)) %>%
+  dplyr::ungroup()
+
+df <- merge(df,tmp)
+
+df$v_b <- (df$coef - df$coef_pooled)^2
+
+df <- df %>%
+  dplyr::group_by(adj,exposure,outcome,coef_pooled,v_w) %>%
+  dplyr::summarise(v_b = sum(v_b)/(20-1)) %>%
+  dplyr::ungroup()
+
+df$v_total <- sqrt(df$v_w + df$v_b + (df$v_b/20))
+
+df <- df[,c("exposure","outcome","adj","coef_pooled","v_total")]
+
+colnames(df) <- c("exposure","outcome","adj","coef","stderr")
 
 # Add unadjusted analysis =====================================================
 
@@ -56,9 +80,9 @@ df$adjustment <- factor(df$adjustment,levels(df$adjustment)[c(2:12,1)])
 
 # Scale estimates =============================================================
 
+df$ci_lower <- 1000*(df$coef - qnorm(0.975)*df$stderr)
+df$ci_upper <- 1000*(df$coef + qnorm(0.975)*df$stderr)
 df$coef <- 1000*df$coef
-df$ci_lower <- 1000*df$ci_lower
-df$ci_upper <- 1000*df$ci_upper
 
 # Generate plots ==============================================================
 
@@ -79,6 +103,6 @@ ggplot(df,
         legend.position="none") +
   facet_wrap(exposure~.,ncol = 1,scales = "free_y")
 
-ggsave("output/figure_adj.jpeg", 
+ggsave("output/figure_adj_mi.jpeg", 
        height = 297, width = 210, unit = "mm", 
        dpi = 600, scale = 1)

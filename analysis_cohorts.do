@@ -135,7 +135,7 @@ forval x = 1/5 {
 
 			if `x'==2 {
 
-				logit outcome exposure $ht_cov pres_year_*, cluster(index_staff)
+				logistic outcome exposure $ht_cov pres_year_*, cluster(index_staff)
 
 				local endog = .
 				local endogp = .
@@ -145,7 +145,7 @@ forval x = 1/5 {
 
 				#delimit ;
 				regsave using "$data/regresults_cohorts.dta", 
-				pval ci addlabel(analysis, "logit", Fstat, `Fstat', endog, `endog', endogp, `endogp', Hansen, `Hansen', Hansenp, `Hansenp',
+				pval ci addlabel(analysis, "logistic_cc", Fstat, `Fstat', endog, `endog', endogp, `endogp', Hansen, `Hansen', Hansenp, `Hansenp',
 				outcome, "dementia", exposure, "`j'", cohort,`x', 
 				ex_start, `ex_start', ex_drug, `ex_drug', ex_diag, `ex_diag', ex_staff0, `ex_staff0',
 				X0Y0, `X0Y0', X1Y0, `X1Y0', X0Y1, `X0Y1', X1Y1, `X1Y1',

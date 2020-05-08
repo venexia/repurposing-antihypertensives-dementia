@@ -1,16 +1,10 @@
 * Load analysis data
 
-use "$data/regresults_adj.dta", clear
+use "$data/regresults_adj_mi.dta", clear
 
 * Restrict to main effects
 
-keep if var=="exposure" | var=="outcome:exposure" | var=="instrument" 
-
-* Exponeniate coefficents
-
-replace coef = cond(var=="outcome:exposure",exp(coef),coef)
-replace ci_lower = cond(var=="outcome:exposure",exp(ci_lower),ci_lower)
-replace ci_upper = cond(var=="outcome:exposure",exp(ci_upper),ci_upper)
+keep if var=="exposure" 
 
 * Tidy dataset
 
@@ -18,7 +12,27 @@ keep adj exposure outcome N coef stderr pval Fstat endog endogp
 order adj exposure outcome N coef stderr pval Fstat endog endogp
 rename N sample_size
 rename adj adjustment
+rename coef coef_imp
+rename stderr stderr_imp
 replace adjustment = subinstr(adjustment, " ", "", .)
+
+* Pool estimates
+
+bysort adj exposure outcome : egen coef = mean(coef_imp)
+bysort adj exposure outcome : egen v_w = mean(stderr_imp^2)
+
+gen v_b_tmp = (coef_imp - coef)^2
+
+bysort adj exposure outcome : egen v_b = sum(v_b_tmp)
+
+replace v_b = v_b/(20-1)
+
+gen stderr = sqrt(v_w + v_b + (v_b/20))
+
+keep adjustment exposure outcome sample_size coef stderr
+order adjustment exposure outcome sample_size coef stderr
+
+duplicates drop
 
 * Recode adjustments
 
