@@ -22,7 +22,7 @@ for (i in files) {
   
   # Open each file ------------------------------------------------------------
   
-  tmp <- read_dta(paste0("data/analysis/",i))
+  tmp <- haven::read_dta(paste0("data/analysis/",i))
   
   # Extract reference treatment and treament of interest ----------------------
   
@@ -44,7 +44,7 @@ for (i in files) {
 
 # Reshape: wide to long --------------------------------------------------------
 
-df <- gather(df,ins,freq,ins0:ins7)
+df <- tidyr::gather(df,ins,freq,ins0:ins7)
 df$ins <- substr(df$ins,4,4)
 df$ins <- as.numeric(df$ins)
 df$freq <- as.numeric(df$freq)

@@ -1,15 +1,12 @@
 # Setup =======================================================================
 
-setwd("E:/Dementia_CPRD_v2/projects/AntihypertensivesIV/")
+setwd("")
 rm(list=ls())
 graphics.off()
-library(tidyverse)
-library(reshape2)
-library(patchwork)
-library(haven)
-library(data.table)
-library(ggplot2)
-library(forcats)
+
+# Ensure all necessary dependencies are installed =============================
+
+# source("code/dependency.R")
 
 # Plot main analysis results ==================================================
 
@@ -19,7 +16,7 @@ source("code/figure_main.R")
 
 source("code/figure_sensitivity.R")
 
-# Plot adjusted results ===========================================
+# Plot adjusted results =======================================================
 
 source("code/figure_adj.R")
 

@@ -1,12 +1,13 @@
 * Setup ------------------------------------------------------------------------
 
-global path "E:/Dementia_CPRD_v2"
-global project "$path/projects/AntihypertensivesIV"
+global path ""
+global project ""
 global dofiles "$project/code"
 global output "$project/output"
 global data "$project/data"
 cd $project
-run "$path/dofiles/codedict.do"
+
+do "$path/dofiles/codedict.do"
 
 * Define covariates to be retained in all files --------------------------------
 
@@ -30,40 +31,40 @@ save "$path/data/patlists/patlist_`event'.dta", replace
 
 * Generate cohort --------------------------------------------------------------
 
-run "$dofiles/cohort.do"
+do "$dofiles/cohort.do"
 
 * Add covariates (Note: cov.do requires cov_*.do) ------------------------------
 
-run "$dofiles/cov.do"
+do "$dofiles/cov.do"
 
 * Run analyses on outcome 'dementia' -------------------------------------------
 
-run "$dofiles/analysis.do"
+do "$dofiles/analysis.do"
 
 * Run analyses on cohorts (e.g. complete covariate, low dose, etc.) ------------
 
-run "$dofiles/analysis_cohorts.do"
+do "$dofiles/analysis_cohorts.do"
 
 * Run analyses on dementia subtype outcomes ------------------------------------
 
-run "$dofiles/analysis_subtypes.do"
+do "$dofiles/analysis_subtypes.do"
 
 * Run analyses of drug vs drug (not included in paper)  ------------------------
 
-* run "$dofiles/analysis_refclasses.do"
+* do "$dofiles/analysis_refclasses.do"
 
 * Run multiple imputation and repeat logistic regression analyses --------------
 
-run "$dofiles/multiple_imputation.do"
+do "$dofiles/multiple_imputation.do"
 
 * Generate Table 1 -------------------------------------------------------------
 
-run "$dofiles/table1.do"
-run "$dofiles/table1_fiveplus.do"
+do "$dofiles/table1.do"
+do "$dofiles/table1_fiveplus.do"
 
 * Generate bias plot -----------------------------------------------------------
 
-run "$dofiles/bias_component_plots.do"
+do "$dofiles/bias_component_plots.do"
 
 * Save analysis dataset --------------------------------------------------------
 
@@ -72,19 +73,19 @@ outsheet using "$output/analysisdta.csv", comma replace
 
 * Adjust based on bias scatter -------------------------------------------------
 
-run "$dofiles/analysis_adj_mi.do"
+do "$dofiles/analysis_adj_mi.do"
 
 * Format eTables ---------------------------------------------------------------
 
-run "$dofiles/eTables_preparedata.do"
-run "$dofiles/eTables_preparedata_adj.do"
-run "$dofiles/eTables_preparedata_cohorts.do"
-run "$dofiles/eTables_preparedata_subtypes.do"
-run "$dofiles/eTables_preparedata_imputed.do"
-run "$dofiles/eTables_excelexport.do"
+do "$dofiles/eTables_preparedata.do"
+do "$dofiles/eTables_preparedata_adj.do"
+do "$dofiles/eTables_preparedata_cohorts.do"
+do "$dofiles/eTables_preparedata_subtypes.do"
+do "$dofiles/eTables_preparedata_imputed.do"
+do "$dofiles/eTables_excelexport.do"
 
 * Convert relative risks to expected cases as described in eText 5 -------------
 
-run "$dofiles/func_RR2EC.do"
+do "$dofiles/func_RR2EC.do"
 RR2EC "ht_arb" 0.55 0.49 0.62
 RR2EC "ht_ccb" 0.81 0.75 0.87

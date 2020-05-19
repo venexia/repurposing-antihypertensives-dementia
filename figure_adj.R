@@ -30,7 +30,7 @@ colnames(df) <- c("exposure","outcome","adj","coef","stderr")
 # Add unadjusted analysis =====================================================
 
 unadj <- read.csv("output/analysis_reg.csv", 
-               stringsAsFactors = FALSE)
+                  stringsAsFactors = FALSE)
 
 unadj <- unadj[unadj$cohort==1 & unadj$analysis=="iv",]
 

@@ -79,7 +79,7 @@ df$analysis <- ifelse(df$analysis=="lin" & df$bin.cont=="binary","Logistic regre
 # Generate continuous covariate plot ==========================================
 
 ggplot(df[df$bin.cont=="continuous",],
-       aes(y = coef_scaled,x = fct_rev(cov.name), color = analysis)) + 
+                aes(y = coef_scaled,x = forcats::fct_rev(cov.name), color = analysis)) + 
   geom_point(position = position_dodge(width = 0.5)) + 
   geom_errorbar(aes(ymin = ci_lower_scaled, ymax = ci_upper_scaled),
                 width = 0,position = position_dodge(width = 0.5)) +
@@ -103,9 +103,10 @@ ggsave("output/figure_biascomponent_con.jpeg",
 # Generate binary covariate plot ==========================================
 
 ggplot(df[df$bin.cont=="binary",],
-       aes(y = exp(coef_scaled),x = fct_rev(cov.name), color = analysis)) + 
+                aes(y = exp(coef_scaled),x = forcats::fct_rev(cov.name), color = analysis)) + 
   geom_point(position = position_dodge(width = 0.5)) + 
-  geom_errorbar(aes(ymin = exp(ci_lower_scaled), ymax = exp(ci_upper_scaled)),width = 0,position = position_dodge(width = 0.5)) +
+  geom_errorbar(aes(ymin = exp(ci_lower_scaled), ymax = exp(ci_upper_scaled)),
+                         width = 0,position = position_dodge(width = 0.5)) +
   geom_hline(yintercept=1, linetype = 2) +
   scale_y_continuous(trans="log",lim = c(0.7,3.6), breaks = c(seq(0.75,2,0.25),seq(2.5,3.5,0.5))) + 
   labs(y = "Odds ratio and 95% CI", x = "", color = "") +

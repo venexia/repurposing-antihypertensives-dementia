@@ -16,13 +16,13 @@ df$exposure <- ifelse(df$exposure=="ht_vad","Vasodilator antihypertensives",df$e
 # Reformat data ===============================================================
 
 df <- df[df$cohort==1 & df$analysis=="iv",c(3,53:84)]
-df <- melt(df,id=c("exposure"))
+df <- reshape2::melt(df,id=c("exposure"))
 df$variable <- as.character(df$variable)
 df$Z <- as.numeric(substr(df$variable,2,2))
 df$XY <- substr(df$variable,3,6)
 df$variable <- NULL
 df <- df[df$XY %in% c("X0Y0","X1Y0","X0Y1","X1Y1"),]
-df <- dcast(df, exposure + Z ~ XY)
+df <- reshape2::dcast(df, exposure + Z ~ XY)
 
 # Calculate percentages =======================================================
 
@@ -35,13 +35,13 @@ df$X1Y1_pc <- ifelse(df$N>0,df$X1Y1/df$N,0)
 # Calculate components of the inequalities ====================================
 
 df <- df %>% 
-  group_by(exposure) %>% 
-  mutate(ineq1_lhs = max(X0Y1_pc),
+  dplyr::group_by(exposure) %>% 
+  dplyr::mutate(ineq1_lhs = max(X0Y1_pc),
          ineq1_rhs = min(1 - X1Y1_pc),
          ineq2_lhs = max(X1Y1_pc),
          ineq2_rhs = min(1 - X0Y1_pc),
          ineq3_lhs = max(X0Y1_pc + X1Y1_pc) + max(X0Y1_pc + X1Y0_pc) + max(X0Y0_pc)) %>% 
-  ungroup()
+  dplyr::ungroup()
 
 # Test inequalities ===========================================================
 

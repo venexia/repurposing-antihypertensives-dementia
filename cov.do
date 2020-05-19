@@ -1,6 +1,6 @@
 * Run dependencies ------------------------------------------------------------
 
-run "$dofiles/cov_comorbid.do"
+do "$dofiles/cov_comorbid.do"
 
 * Load cohort data -------------------------------------------------------------
 
@@ -14,7 +14,7 @@ local adj = "charlson cons_rate bmi smoking alcohol"
 local vars = "$ht_basic"
 
 foreach x in `adj' {
-	run "$dofiles/cov_`x'.do"
+	do "$dofiles/cov_`x'.do"
 	use "$data/analysis.dta", clear
 	merge 1:1 patid using "$data/covar/`x'.dta", keep(match master) keepusing(patid `x')
 	local vars = "`vars'" + " `x'"
