@@ -16,7 +16,7 @@ Interpretation: We found small differences in antihypertensive drug class effect
 
 ## Using this code
 
-To run this code, set your working directory in the files ‘Hypertentension.do’ and ‘Hypertentension.R’. Make sure you have installed the required dependencies, listed in 'dependency.do' and 'dependendy.R' respectively. You should then be able to run the file ‘Hypertentension.do’ in Stata initially and then ‘Hypertentension.R’ in R. All other files are called when required from these files. The Stata code covers most of the analysis, while the R code covers most of the graphical and supplementary output. Setup of the CPRD dataset prior to this analysis is covered in a separate repository: https://github.com/venexia/CleanCPRD.
+To run this code, set your working directory in the files ‘Hypertentension.do’ and ‘Hypertentension.R’. Make sure you have installed the required dependencies, listed in 'dependency.do' and 'dependency.R' respectively. You should then be able to run the file ‘Hypertentension.do’ in Stata initially and then ‘Hypertentension.R’ in R. All other files are called when required from these files. The Stata code covers most of the analysis, while the R code covers most of the graphical and supplementary output. Setup of the CPRD dataset prior to this analysis is covered in a separate repository: https://github.com/venexia/CleanCPRD.
 
 ## Availability of data
 
