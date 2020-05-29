@@ -1,6 +1,6 @@
 # Comparison of antihypertensive drug classes for dementia prevention: an instrumental variable analysis study
 
-This respository contains the code to reproduce the analysis from the following paper:
+This repository contains the code to reproduce the analysis from the following paper:
 
 Walker, V., Davies, N., Martin, R., & Kehoe, P. (2019). Comparison of antihypertensive drug classes for dementia prevention. BioRxiv. https://doi.org/10.1101/517482
 
