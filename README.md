@@ -39,4 +39,4 @@ If you would like any further information, please contact venexia.walker@bristol
 
 ## Acknowledgement
 
-Thank you to Tom Palmer (@remlapmot) and Sam Abbott (@seabbs) for useful feedback on this repository.
+Thank you to Tom Palmer ([@remlapmot](https://github.com/remlapmot)) and Sam Abbott ([@seabbs](https://github.com/seabbs)) for useful feedback on this repository.
