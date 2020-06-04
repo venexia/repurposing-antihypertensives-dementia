@@ -1,6 +1,6 @@
 # Setup =======================================================================
 
-setwd("E:/Dementia_CPRD_v2/projects/AntihypertensivesIV/")
+setwd("")
 rm(list=ls())
 graphics.off()
 
