@@ -1,6 +1,6 @@
 # Comparison of antihypertensive drug classes for dementia prevention: an instrumental variable analysis study
 
-This repository contains the code to reproduce the analysis from the following paper:
+This respository contains the code to reproduce the analysis from the following paper:
 
 Walker, V., Davies, N., Martin, R., & Kehoe, P. (2019). Comparison of antihypertensive drug classes for dementia prevention. BioRxiv. https://doi.org/10.1101/517482
 
@@ -16,7 +16,7 @@ Interpretation: We found small differences in antihypertensive drug class effect
 
 ## Using this code
 
-To run this code, set your working directory in the files ‘Hypertentension.do’ and ‘Hypertentension.R’. Make sure you have installed the required dependencies, listed in 'dependency.do' and 'dependency.R' respectively. You should then be able to run the file ‘Hypertentension.do’ in Stata initially and then ‘Hypertentension.R’ in R. All other files are called when required from these files. The Stata code covers most of the analysis, while the R code covers most of the graphical and supplementary output. Setup of the CPRD dataset prior to this analysis is covered in a separate repository: https://github.com/venexia/CleanCPRD.
+To run this code, set your working directory in the files ‘Hypertentension.do’ and ‘Hypertentension.R’. Make sure you have installed the required dependencies, listed in 'dependency.do' and 'dependency.R' respectively. You should then be able to run the file ‘Hypertension.do’ in Stata initially and then ‘Hypertension.R’ in R. All other files are called when required from these files. The Stata code covers most of the analysis, while the R code covers most of the graphical and supplementary output. Setup of the CPRD dataset prior to this analysis is covered in a separate repository: https://github.com/venexia/CleanCPRD.
 
 ## Availability of data
 
@@ -36,3 +36,7 @@ This work was supported by the Perros Trust and the Integrative Epidemiology Uni
 ## Further information
 
 If you would like any further information, please contact venexia.walker@bristol.ac.uk. 
+
+## Acknowledgement
+
+Thank you to Tom Palmer (@remlapmot) and Sam Abbott (@seabbs) for useful feedback on this repository.
