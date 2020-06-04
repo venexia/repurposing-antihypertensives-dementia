@@ -1,6 +1,0 @@
-if (!require(pacman)) install.packages("pacman"); library(pacman)
-p_load("reshape2")
-p_load("haven")
-p_load("ggplot2")
-p_load("forcats")
-p_load("magrittr")

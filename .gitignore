@@ -1,0 +1,5 @@
+output/*
+data/*
+!output/README.md
+!data/README.md
+.Rhistory
